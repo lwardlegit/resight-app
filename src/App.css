@@ -1,0 +1,399 @@
+
+html, body {
+  height: 100%;
+  overflow: auto;
+
+}
+body {
+  height: 100%;
+
+}
+.App {
+  text-align: center;
+}
+.transcriptspan{
+visibility: hidden;
+z-index: -1;
+}
+
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.menuItems{
+  width:8%;
+  /* margin-bottom: 10em;
+  margin-left: 15em; */
+  z-index: 3;
+}
+.nav{
+  /* margin:auto;
+  margin-left: 0;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  padding-bottom: 3em; */
+  z-index: 3;
+}
+.navImageBtns{
+  background-color: Transparent;
+  width: 2em;
+  height: 2em;
+  outline:none;
+}
+.navImageBtns :hover{
+  width: 2em;
+  height: 2em;
+}
+.centerNav{
+    margin:auto;
+    margin-top: 7em;
+    margin-bottom: 7em;
+    height: 10%;
+    background-color: blue;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+mark{
+    background: yellow;
+    color: black;
+}
+.documentUpload{
+    width: 10em;
+    display: block;
+    margin: auto;
+
+}
+.documentUpload input{
+margin-bottom: 1em;
+
+}
+.bottombtns{
+  width:100%;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  height:3em;
+margin-top: 3em;
+  padding-bottom: 1em;
+}
+
+#feedbackButton{
+   color:black;
+   text-decoration: none;
+}
+#feedbackButton :hover{
+  color:white;
+    text-decoration: none;
+}
+
+a{
+  color:black;
+  text-decoration: none;
+}
+
+a :hover{
+color:white;
+text-decoration: none;
+}
+
+.uploadImage{
+}
+
+
+.documentText{
+  width:23em;
+  height:14em;
+  overflow: auto;
+  border: none;
+  border-radius: 5%;
+  background-color: white;
+  z-index: 1;
+}
+.docbody{
+z-index: 0
+}
+.textBackground{
+  color:black;
+  z-index: 1;
+  background-color: white;
+}
+.highlighted{
+  background-color: yellow;
+}
+
+.documentContainer{
+    padding-top: 1em;
+    min-width: 22em;
+    min-height: 11em;
+    width: 22em;
+    margin: auto;
+    z-index: 1;
+}
+.BreakpointContainer{
+margin:auto;
+width:2em;
+height:2em;
+padding-left: 1em;
+padding-right: 1em;
+}
+.highlightHelperText{
+  width:50%;
+  display: inline-flex;
+  word-wrap: break-word;
+  margin:auto;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.box {
+ transition: box-shadow .3s;
+ width: 30px;
+ height: 30px;
+  margin: 1em;
+ border-radius:25px;
+ border: none;
+ border-width: 5px;
+ background: #fff;
+ float: left;
+
+}
+.box:hover {
+ box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+.box :focus {
+  background-color: yellow;
+}
+
+::selection{
+  background-color: yellow;
+}
+.scholarText{
+  background-color: #00ffd9;
+}
+.breakpointUl{
+  list-style-type: none;
+}
+.highlighted{
+  background-color: blue;
+}
+.Nav{
+  margin-top: 5em;
+}
+
+.sidenav {
+  height: 20em;
+  position: absolute;
+  width: 0;
+  top: 5em;
+  left: 55em;
+  background-color: #922ab8;
+  overflow-x: hidden;
+  /* transition: 0.5s; */
+  padding-top: 60px;
+  z-index: 4;
+  /* animation: reveal 5s forwards; */
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  z-index: 0;
+}
+
+.sidenav a:hover {
+  color: black;
+}
+
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.notetxtcontainer{
+  margin-top: 3em;
+  margin-left: 3em;
+  margin-right: 3em;
+  width: 80%;
+  height: 30em;
+}
+.notebody{
+  width:100%;
+  height:100%;
+}
+.highlighted{
+  background-color:orange;
+}
+
+.centerButtons {
+    display: flex;
+    width: 25em;
+    margin: 0 auto;
+    padding-top: 1em;
+    justify-content: center;
+}
+
+.optionsIcon {
+    margin: auto;
+    margin-top: 2em;
+    width: 2em;
+    padding-left: 16em;
+}
+
+.demoButton{
+  margin-right: 2em;
+}
+.SpeechRecognition{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.audioBtns{
+  display: flex;
+  width: 25em;
+  margin: 0 auto;
+  padding-top: 1em;
+  justify-content: center;
+
+}
+.rs-container{
+  padding-top: 3em;
+}
+.paddingIcons{
+  padding:7px;
+}
+
+@media only screen and (max-width:321px)  {
+  .documentContainer{
+    padding-top: 3em;
+    width: 20em;
+    min-width: 20em;
+
+  }
+  .centerButtons{
+    justify-content: normal;
+  }
+  .optionsIcon{
+    padding-left: 14em;
+  }
+  .demoButton{
+    margin-right: 0em;
+  }
+  .feedbackButton button{
+    display: inline-block;
+    text-align: center;
+    padding-bottom: 5em;
+  }
+
+  .paddingIcons{
+    padding:2px;
+  }
+ }
+
+@media only screen and (min-width:322px) and (max-width:360px)  {
+  .optionsIcon {
+    padding-left: 16em;
+  }
+  .documentContainer{
+    width: 21em;
+    padding-top: 2em;
+  }
+  .centerButtons{
+    justify-content: normal;
+  }
+}
+
+@media only screen and (min-width:361px) and (max-width:419px)  {
+  .optionsIcon {
+    padding-left: 16em;
+  }
+  .documentContainer{
+    width: 20em;
+    padding-top: 2em;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .rs-container{
+  width: 30% !important;
+  }
+  .sidenav {
+    top: 5em;
+    left: 9em;
+  }
+  .sidenav .closebtn {
+    left: 0px;
+    margin-left:0px;
+  }
+}
+
+@media only screen and (max-width: 421px) and (min-height: 800px) {
+  .documentContainer{
+    padding-top: 2em;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .documentContainer{
+    padding-top: 3em;
+  }
+  .sidenav {
+    top: 5em;
+    left: 20em;
+  }
+  .rs-container{
+    width: 15% !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1040px) {
+  .sidenav {
+    top: 5em;
+    left: 28em;
+  }
+  .rs-container{
+    width: 15% !important;
+  }
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reveal {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}

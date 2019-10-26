@@ -1,0 +1,47 @@
+{
+  "name": "resanote",
+  "version": "0.1.0",
+  "engines": {
+    "node": "10.15.1",
+    "npm": "6.10.2"
+  },
+  "private": true,
+  "dependencies": {
+    "firebase": "^5.11.1",
+    "js-file-download": "^0.4.8",
+    "node-tesseract-ocr": "^0.1.0",
+    "oxford-dictionary": "^1.4.1",
+    "react": "^16.9.0",
+    "react-bootstrap": "^1.0.0-beta.12",
+    "react-dom": "^16.9.0",
+    "react-froala-wysiwyg": "^2.9.6",
+    "react-highlight": "^0.12.0",
+    "react-html-parser": "^2.0.2",
+    "react-router-dom": "^5.1.0",
+    "react-scripts": "2.1.8",
+    "react-speech": "^0.3.2",
+    "react-speech-recognition": "^2.0.4",
+    "request": "^2.88.0",
+    "serve": "^11.1.0",
+    "synonyms": "^1.0.1",
+    "tesseract.js": "^1.0.19",
+    "tesseract.ts": "^1.1.2",
+    "web-speech-cognitive-services": "^4.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {}
+}
