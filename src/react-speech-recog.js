@@ -5,7 +5,7 @@ class Dictaphone extends Component {
 
 
 libraryOfIntents=(transcript,resetTranscript)=>{
-  console.log("inside library function ")
+  console.log("inside library function now ")
   var intentToPass;
   if(transcript.includes("notes")){
            intentToPass = "notes"
