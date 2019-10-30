@@ -33,27 +33,44 @@ libraryOfIntents=(transcript,resetTranscript)=>{
 }
 
 
-highlightOnRead=(transcript, cursor)=>{
+componentDidUpdate=(prevProps)=>{
+  console.log(prevProps,this.props.cursor)
 
-         console.log("transcript",transcript)
-         console.log("cursor",cursor.anchorNode.parentNode.id) //we only need the word
+  if (this.props.readAlongHighlightState===true){
+      let {transcript} = prevProps
 
-         if(transcript.includes(" ")){
-           transcript = transcript.split(" ").pop()
-         }
-         if(transcript = cursor.textContent.toLowerCase()){
-             cursor.style.backgroundColor = 'yellow'; //highlight the span matching the intent
-         }
-         cursor = document.getElementById(cursor.anchorNode.parentNode.id).nextSibling.nextElementSibling;
-               return cursor
-     };
+              if(this.props.cursor !== '' && this.props.cursor !== undefined){
+                var cursor = this.props.cursor
+
+                  //console.log("cursor parentNode ",cursor.anchorNode.parentNode)
+                  //console.log("just cursor",cursor)
+                  //console.log("just inner html",cursor.anchorNode.parentNode.textContent)
+                  //console.log("cursor innerhtml",cursor.anchorNode.innerhtml)
+
+                    if(transcript.includes(" ")){
+                        transcript = transcript.split(" ").pop()
+                        console.log(transcript)
+                      }
+
+                        console.log("cursor anchor node textcontent:",cursor.anchorNode.textContent)
+                        if(transcript === cursor.anchorNode.textContent.toString().toLowerCase()){ //AFTER UPDATING BREAKS HERE ?? why cant this just be cursor.innerhtml?
+                          cursor.anchorNode.parentNode.style.backgroundColor = 'yellow';
+                          cursor = cursor.anchorNode.parentNode.nextElementSibling
+                            this.props.updatecursor (cursor); //highlight the span matching the intent
+
+                        }else{
+                              console.log("no cursor")
 
 
+
+                              }
+                          }
+                        }
+                      }
 
 
   render() {
    const {transcript, resetTranscript, browserSupportsSpeechRecognition} = this.props
-    var cursor=''
 
     if (!browserSupportsSpeechRecognition) {
       return null
@@ -61,19 +78,9 @@ highlightOnRead=(transcript, cursor)=>{
     if(transcript==="notes"||transcript==="cards"||transcript==="home"|| transcript==="settings" || transcript==="read document"){
       this.libraryOfIntents(transcript,resetTranscript);
     }
-
+//<span id="transcriptSpan"className="transcriptspan"> {transcript}  </span>
     return (
       <div>
-        <span id="transcriptSpan"className="transcriptspan" onChange={()=>{
-
-          if(this.props.readAlongHighlightState===true){
-            if(cursor===''){
-              this.highlightOnRead(transcript,window.getSelection())
-            }else{
-                this.highlightOnRead(transcript,cursor)
-            }
-          }
-        }}> {transcript}  </span>
         <Button variant="outline-dark" onClick={resetTranscript}>Reset</Button>
       </div>
     )

@@ -42,6 +42,7 @@ this.state={
   NoteContent: '',
   listening: false,
   readAlongHighlightState: false,
+  cursor:'',
   autostartStatus: true,
   highlightedText: " ",
 
@@ -181,6 +182,10 @@ popupByVoice = () => {
 
    this.setState({intent:intent})
    console.log("altering intent")
+ }
+ updatecursor = (selection) =>{
+   this.setState({cursor:selection})
+   console.log("UPDATING CURSOR", selection)
  }
 
 
@@ -366,6 +371,7 @@ createBreakPoint = (param, x, y) =>{
              toggleMenu = {this.toggleMenu}
               closeToggleMenu = {this.closeToggleMenu}
               readAlongHighlight = {this.readAlongHighlight}
+              cursor={this.state.cursorlocation}
                readAlongHighlightState = {this.state.readAlongHighlightState}
             lookupWords = {this.lookupWords}
             addBreakPointMode = {this.addBreakPointMode}
@@ -377,6 +383,8 @@ createBreakPoint = (param, x, y) =>{
                 close={this.closeModal}
             downloadNotes={this.downloadNotes}
             downloadAudio = {this.downloadAudio}
+            updatecursor = {this.updatecursor}
+            cursor = {this.state.cursor}
             showAudio = {this.showAudio} />}/>
 
           <Route exact path="/about" component= {About}/>
@@ -434,7 +442,10 @@ createBreakPoint = (param, x, y) =>{
                downloadNotes={this.downloadNotes}
                downloadAudio = {this.downloadAudio}
                showAudio = {this.showAudio}
-               grabIntent= {this.grabIntentFromSpeech} />}/>
+               grabIntent= {this.grabIntentFromSpeech}
+               updatecursor = {this.updatecursor}
+               cursor = {this.state.cursor}
+                />}/>
           <Route exact path="/about" component= {About}/>
         </Switch>
 

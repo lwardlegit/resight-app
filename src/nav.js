@@ -38,7 +38,7 @@ render(){
 
 <div>
 
-<Nav  activeKey="/home" className="centerButtons" onSelect={selectedKey => alert(`selected ${selectedKey}`)}>
+<Nav activeKey="/home" className="centerButtons" onSelect={selectedKey => alert(`selected ${selectedKey}`)}>
 
 <Nav.Item className = "paddingIcons">
   <BreakPointsDropdown style={{ padding: 10 }} listOfBreakPoints = {this.props.listOfBreakPoints} createBreakPoint = {this.props.createBreakPoint} addBreakPointMode = {this.props.addBreakPointMode}/>
@@ -53,7 +53,7 @@ render(){
 </Nav.Item>
 
 <Nav.Item className = "paddingIcons">
-  <button onClick={this.props.readAlongHighlight}> <img className="navImageBtns" src={readAlongHighlight} /></button>
+    <button onClick={this.props.readAlongHighlight}> <img className="navImageBtns" src={readAlongHighlight} /></button>
 </Nav.Item>
 
 

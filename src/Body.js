@@ -54,18 +54,6 @@ export class Body extends Component {
 
 
 
-
-    buildSpanArray = (documentText, documentarray) => {
-        for (var i = 0; i <= documentText.length; i++) {
-            let span = document.createElement("span");
-            span.value = documentText[i];
-            documentarray.push(span)
-              }
-                  console.log(documentarray)
-                  return documentarray
-          }
-
-
     rundemo = () => {
       //function is designed to run all the essential functions in the app one after another
 
@@ -108,7 +96,6 @@ export class Body extends Component {
             downloadNotes = { this.props.downloadNotes }
             highlight = { this.props.highlight }
             downloadAudio = { this.props.downloadAudio}
-            onReadHighlight = {this.props.onReadHighlight}
             />
 
             <div className = "documentContainer">
@@ -211,25 +198,25 @@ console.error(reason);
             downloadNotes = { this.props.downloadNotes }
             highlight = { this.props.highlight }
             downloadAudio = { this.props.downloadAudio}
-            onReadHighlight = {this.props.onReadHighlight}
             />
 
             < div className = "documentContainer">
             <div id="docbod"className="documentText"
               onMouseUp={(e, props, state)=>{
-
-
                  if(this.props.addBreakPoint===true){
                    this.props.createBreakPoint(window.getSelection(), e.clientX, e.clientY)
                 }
+                if(this.props.readAlongHighlightState===true){
+                  this.props.updatecursor(window.getSelection())
+                }
             }}
-
                  value={this.props.documentText}
                  rows="5"
-                    cols="50">  </div>
+                cols="50">
+            </div>
 
                     <div className="bottombtns">
-                      <SpeechRecognition grabIntent={this.props.grabIntent} readAlongHighlightState={this.props.readAlongHighlightState} id="speakAloud" className="audioBtns"  />
+                      <SpeechRecognition cursor={this.props.cursor} updatecursor={this.props.updatecursor} readAlongHighlightState={this.props.readAlongHighlightState} grabIntent={this.props.grabIntent} id="speakAloud" className="audioBtns"  />
                       <Button variant="outline-dark" onClick = {
                       (e, props, state, location) => {
                         var demoUrl="https://tesseract.projectnaptha.com/img/eng_bw.png";
