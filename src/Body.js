@@ -5,19 +5,20 @@ import { Button } from 'react-bootstrap';
 import { ButtonGroup } from 'react-bootstrap';
 import playbutton from './assets/playbutton.png';
 import SpeechSynthesis from '../node_modules/react-speech/src/speechSynthesis.js';
+import SpeechRecognition from './react-speech-recog.js';
 import Speech from 'react-speech';
-import SpeechRecognition from './react-speech-recog';
 import HighlightHelper from './components/highlighthelper.js';
 import $ from 'jquery';
 import {getPageText,geturl,makepdf,pdfjsLib} from './scripts/makepdf.js';
 
-
-
-
-//const pdfjsLibworkerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
-
+const textToSpeech = require('@google-cloud/text-to-speech');
+const fs = require('fs');
+const util = require('util');
 var documentarray = []
 var pdfUtil = require('pdf-to-text');
+
+
+
 export class Body extends Component {
 
      recognize = async (inputimg) => {
@@ -32,10 +33,11 @@ export class Body extends Component {
          await worker.loadLanguage('eng');
          await worker.initialize('eng');
          const { data: { text } } = await worker.recognize(image.src);
-         console.log(text)
+
          console.log(this.props.documentText)
-          this.props.getTextFromBody(this.splitdocintowords(document.getElementById("docbod"),text))
+          this.props.getTextFromBody(this.splitdocintowords(document.getElementById("docbod"),text)) //this is working
      };
+
 
 
      splitdocintowords=(div,arr)=> {
@@ -73,8 +75,6 @@ export class Body extends Component {
     }
 
     render(props) {
-
-        const {transcript, resetTranscript, browserSupportsSpeechRecognition} = this.props
         var documentView;
         if (!this.props.fileviewableState) {
 
@@ -96,6 +96,7 @@ export class Body extends Component {
             downloadNotes = { this.props.downloadNotes }
             highlight = { this.props.highlight }
             downloadAudio = { this.props.downloadAudio}
+            documentText = {this.props.documentText}
             />
 
             <div className = "documentContainer">
@@ -198,6 +199,7 @@ console.error(reason);
             downloadNotes = { this.props.downloadNotes }
             highlight = { this.props.highlight }
             downloadAudio = { this.props.downloadAudio}
+            documentText = {this.props.documentText}
             />
 
             < div className = "documentContainer">
@@ -206,8 +208,15 @@ console.error(reason);
                  if(this.props.addBreakPoint===true){
                    this.props.createBreakPoint(window.getSelection(), e.clientX, e.clientY)
                 }
-                if(this.props.readAlongHighlightState===true){
-                  this.props.updatecursor(window.getSelection())
+                if(this.props.readAlongHighlightState===true){ //if the highlight state is true
+                  this.props.updatecursor(window.getSelection()) //cursor location is the selection
+                }
+
+                if (this.props.scholarMode===true){
+                  console.log(window.getSelection())
+                  window.getSelection().anchorNode.parentElement.style.backgroundColor="#92f2f7"
+                  this.props.synonymsFunction(window.getSelection().anchorNode.textContent.toLowerCase())
+
                 }
             }}
                  value={this.props.documentText}
@@ -216,7 +225,7 @@ console.error(reason);
             </div>
 
                     <div className="bottombtns">
-                      <SpeechRecognition cursor={this.props.cursor} updatecursor={this.props.updatecursor} readAlongHighlightState={this.props.readAlongHighlightState} grabIntent={this.props.grabIntent} id="speakAloud" className="audioBtns"  />
+
                       <Button variant="outline-dark" onClick = {
                       (e, props, state, location) => {
                         var demoUrl="https://tesseract.projectnaptha.com/img/eng_bw.png";

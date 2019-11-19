@@ -60,7 +60,7 @@ render(){
 </Nav>
 
 <ToggleMenu closeToggleMenu={this.props.closeToggleMenu} openNotes={this.props.openNotes} highlight={this.props.highlight} showNotes={this.props.showNotes} close={this.props.close}
-downloadNotes={this.props.downloadNotes} downloadAudio = {this.props.downloadAudio}/>
+downloadNotes={this.props.downloadNotes} downloadAudio = {this.props.downloadAudio} documentText = {this.props.documentText}/>
 
 </div>
 </div>

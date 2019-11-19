@@ -35,13 +35,11 @@ libraryOfIntents=(transcript,resetTranscript)=>{
 
 componentDidUpdate=(prevProps)=>{
   console.log(prevProps,this.props.cursor)
-
   if (this.props.readAlongHighlightState===true){
       let {transcript} = prevProps
 
-              if(this.props.cursor !== '' && this.props.cursor !== undefined){
+              if(this.props.cursor !== '' && this.props.cursor !== undefined){ //if the cursor is defined and it isn't blank
                 var cursor = this.props.cursor
-
                   //console.log("cursor parentNode ",cursor.anchorNode.parentNode)
                   //console.log("just cursor",cursor)
                   //console.log("just inner html",cursor.anchorNode.parentNode.textContent)
@@ -52,21 +50,28 @@ componentDidUpdate=(prevProps)=>{
                         console.log(transcript)
                       }
 
-                        console.log("cursor anchor node textcontent:",cursor.anchorNode.textContent)
-                        if(transcript === cursor.anchorNode.textContent.toString().toLowerCase()){ //AFTER UPDATING BREAKS HERE ?? why cant this just be cursor.innerhtml?
+                      if(cursor.nodeName !== "#text" && cursor.anchorNode!==undefined){
+                        if(transcript === cursor.anchorNode.textContent.toLowerCase()){
                           cursor.anchorNode.parentNode.style.backgroundColor = 'yellow';
-                          cursor = cursor.anchorNode.parentNode.nextElementSibling
-                            this.props.updatecursor (cursor); //highlight the span matching the intent
+
+                            this.props.updatecursor (cursor.anchorNode.parentNode.nextSibling);
+                            this.props.resetTranscript()//make the new cursor be the next <span> in the document body
+                          }
 
                         }else{
-                              console.log("no cursor")
 
+                          if(transcript === cursor.nextElementSibling.textContent.toLowerCase()){
+                            cursor.nextElementSibling.style.backgroundColor = 'yellow';
 
-
-                              }
+                              //this.props.updatecursor (cursor.anchorNode.parentNode.nextSibling);
+                              this.props.updatecursor (cursor.nextSibling);
+                              this.props.resetTranscript() //make the new cursor be the next <span> in the document body
+                            }
                           }
+
                         }
                       }
+                    }
 
 
   render() {
@@ -78,7 +83,7 @@ componentDidUpdate=(prevProps)=>{
     if(transcript==="notes"||transcript==="cards"||transcript==="home"|| transcript==="settings" || transcript==="read document"){
       this.libraryOfIntents(transcript,resetTranscript);
     }
-//<span id="transcriptSpan"className="transcriptspan"> {transcript}  </span>
+//  <span id="transcriptSpan"className="transcriptspan"> {transcript}  </span>
     return (
       <div>
         <Button variant="outline-dark" onClick={resetTranscript}>Reset</Button>

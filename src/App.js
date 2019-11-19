@@ -4,7 +4,7 @@ import './App.css';
 import {Button} from 'react-bootstrap';
 import {Body} from './Body.js';
 import {LandingPage} from './landingpage';
-//import SpeechRecognition from './react-speech-recog';
+import SpeechRecognition from './react-speech-recog.js';
 import Dictionary from "oxford-dictionary";
 
 
@@ -14,15 +14,13 @@ import Speech from 'react-speech'; //this converts your text into speech
 import {About} from './About';
 import {Signup} from './signup';
 import {BrowserRouter,Router,Route,Switch} from 'react-router-dom';
-import Play from './assets/play.jpg';
-import Pause from './assets/pause.png';
 import Navigation from './nav';
 
 // Require Font Awesome.
 import ReactHtmlParser from 'react-html-parser';
 import 'font-awesome/css/font-awesome.css';
 import $ from 'jquery'; window.$ = $;
-
+const thesaurus = require('thesaurus-synonyms');
 
 class App extends Component {
 
@@ -43,6 +41,7 @@ this.state={
   listening: false,
   readAlongHighlightState: false,
   cursor:'',
+  transcript:'',
   autostartStatus: true,
   highlightedText: " ",
 
@@ -192,7 +191,6 @@ popupByVoice = () => {
  grabBodyText = (bodyText) =>{
    this.setState({documentContent:bodyText}, function (){
      console.log("logging the document content", bodyText)
-
    })
  }
 
@@ -241,38 +239,22 @@ popupByVoice = () => {
 
  setScholarMode = () =>{
    this.setState({scholarMode:!this.state.scholarMode})
-   console.log("scholar mode active")
+   if (this.state.scholarMode === false){
+     console.log("scholar mode active")
+   }else{
+     console.log("scholar mode deactivated")
+   }
 }
 
 //this function is triggered from an onClick inside my body component
-searchForSynonymsAndDef = (param) =>{
-if(this.state.scholarMode==true){
-console.log("INSIDE SYNONYMS here is the param",param) //we dp have the param here
+searchForSynonymsAndDef = (word) =>{
 
-  var p = new Promise((resolve,reject)=>{
-    var synonyms = require("synonyms");
-    var result=synonyms(param)
-
-    if (result != undefined){
-    resolve(result)
-  }else{
-    reject("error: the result is undefined")
-  }
-
-  }).then((result)=>{
-    console.log("result is:",result)
-  })
-  .then((result)=>{
-    this.setState({textToReadAloud: "here are some synonyms for "
-    +param +"...firstly.....nouns...."+result})
-
-  })
-
+if(this.state.scholarMode===true){
+  thesaurus.similar(word).then(console.log)
   }else{
     console.log("sorry scholar mode is off")
   }
 }
-
 
 addBreakPointMode = () =>{
       this.setState({addBreakPoint:true})
@@ -362,6 +344,7 @@ createBreakPoint = (param, x, y) =>{
              setHighlightMode={this.setHighlightMode}
              highlightText = {this.highlight}
               highlightMode = {this.state.highlightMode}
+              scholarMode = {this.state.scholarMode}
               setScholarMode ={this.setScholarMode}
               synonymsFunction = {this.searchForSynonymsAndDef}
                logOut = {this.logIn}
@@ -385,11 +368,11 @@ createBreakPoint = (param, x, y) =>{
             downloadAudio = {this.downloadAudio}
             updatecursor = {this.updatecursor}
             cursor = {this.state.cursor}
-            showAudio = {this.showAudio} />}/>
+            showAudio = {this.showAudio}/>}/>
 
           <Route exact path="/about" component= {About}/>
         </Switch>
-
+          <SpeechRecognition cursor={this.state.cursor} updatecursor={this.updatecursor} readAlongHighlightState={this.state.readAlongHighlightState} grabIntent={this.grabIntent} id="speakAloud" className="audioBtns"  />
         </div>
         </BrowserRouter>
 
@@ -421,6 +404,7 @@ createBreakPoint = (param, x, y) =>{
                setHighlightMode={this.setHighlightMode}
                highlightText = {this.highlight}
                highlightMode = {this.state.highlightMode}
+               scholarMode = {this.state.scholarMode}
                setScholarMode ={this.setScholarMode}
                synonymsFunction = {this.searchForSynonymsAndDef}
                logOut = {this.logIn}
@@ -444,11 +428,11 @@ createBreakPoint = (param, x, y) =>{
                showAudio = {this.showAudio}
                grabIntent= {this.grabIntentFromSpeech}
                updatecursor = {this.updatecursor}
-               cursor = {this.state.cursor}
-                />}/>
+               cursor = {this.state.cursor}/>}/>
+
           <Route exact path="/about" component= {About}/>
         </Switch>
-
+          <SpeechRecognition cursor={this.state.cursor} updatecursor={this.updatecursor} readAlongHighlightState={this.state.readAlongHighlightState} grabIntent={this.grabIntent} id="speakAloud" className="audioBtns"  />
 
         </div>
         </BrowserRouter>

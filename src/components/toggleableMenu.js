@@ -6,6 +6,7 @@ import '../App.css';
 export default class ToggleMenu extends Component{
 
   render(props){
+        
     return(
       <div>
       { this.props.showNotes ? <div onClick={this.props.closeModalHandler} className="back-drop"></div> : null }
@@ -13,7 +14,14 @@ export default class ToggleMenu extends Component{
       <a href="javascript:void(0)" class="closebtn" onClick={this.props.closeToggleMenu}>&times;</a>
       <a href="#">Forum</a>
       <a href="#" onClick={this.props.openNotes}>Notes</a>
-      <a id = "audioDownload"href="#" onClick={this.props.downloadAudio}>download audio</a>
+      <a id = "audioDownload"href="#" onClick={
+      ()=>{
+        //let out = text2wav(this.props.documentText,{voice: 'en'});
+        console.log("converting text")
+        console.log(this.props.documentText) //this is undefined
+      }
+    }>download audio</a>
+
       <a href="#">About</a>
       </div>
       <Modal
