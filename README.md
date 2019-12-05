@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Resight is a multisensory reading comprehension application aimed at improving literary retention for students. 
 
 ## Available Scripts
 
